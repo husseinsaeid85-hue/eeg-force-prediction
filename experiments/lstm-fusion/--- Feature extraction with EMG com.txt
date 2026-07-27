@@ -1,0 +1,54 @@
+--- Feature extraction with EMG complete. ---
+    Final EEG features shape: (397, 80)
+    Final EMG features shape: (397, 40)
+    Combined features shape (X_scaled): (15494, 120)
+    Final targets shape (y): (15494, 10)
+
+--- RUNNING LSTM EXPERIMENT ---
+
+--- Creating sequences with a length of 5 time steps... ---
+    Original X shape: (15494, 120)
+    Original y shape: (15494, 10)
+    Resulting X_seq shape: (15490, 5, 120)
+    Resulting y_seq shape: (15490, 10)
+--- Sequence creation complete. ---
+
+--- STEP 4: HYPERPARAMETER TUNING & EVALUATION (LSTM with Optuna) ---
+    Data split: Train=9294, Validation=3098, Test=3098
+
+--- Best LSTM Model Parameters Found (Optuna) ---
+{'hidden_units': 96, 'num_layers': 2, 'learning_rate': 0.002659432602506228, 'dropout': 0.12255749503817492}
+-------------------------------------------------
+
+--- Training final LSTM model on full training data with best params... ---
+Final Training Epoch 1/30, Train Loss: 0.0627, Val Loss: 0.0574
+Final Training Epoch 2/30, Train Loss: 0.0507, Val Loss: 0.0446
+Final Training Epoch 3/30, Train Loss: 0.0411, Val Loss: 0.0391
+Final Training Epoch 4/30, Train Loss: 0.0349, Val Loss: 0.0325
+Final Training Epoch 5/30, Train Loss: 0.0294, Val Loss: 0.0287
+Final Training Epoch 6/30, Train Loss: 0.0256, Val Loss: 0.0226
+Final Training Epoch 7/30, Train Loss: 0.0220, Val Loss: 0.0206
+Final Training Epoch 8/30, Train Loss: 0.0187, Val Loss: 0.0173
+Final Training Epoch 9/30, Train Loss: 0.0155, Val Loss: 0.0149
+Final Training Epoch 10/30, Train Loss: 0.0138, Val Loss: 0.0123
+Final Training Epoch 11/30, Train Loss: 0.0124, Val Loss: 0.0143
+Final Training Epoch 12/30, Train Loss: 0.0124, Val Loss: 0.0113
+Final Training Epoch 13/30, Train Loss: 0.0101, Val Loss: 0.0117
+Final Training Epoch 14/30, Train Loss: 0.0096, Val Loss: 0.0096
+Final Training Epoch 15/30, Train Loss: 0.0087, Val Loss: 0.0096
+Final Training Epoch 16/30, Train Loss: 0.0084, Val Loss: 0.0086
+Final Training Epoch 17/30, Train Loss: 0.0090, Val Loss: 0.0104
+Final Training Epoch 18/30, Train Loss: 0.0082, Val Loss: 0.0074
+Final Training Epoch 19/30, Train Loss: 0.0069, Val Loss: 0.0068
+Final Training Epoch 20/30, Train Loss: 0.0058, Val Loss: 0.0062
+Final Training Epoch 21/30, Train Loss: 0.0052, Val Loss: 0.0062
+Final Training Epoch 22/30, Train Loss: 0.0048, Val Loss: 0.0055
+Final Training Epoch 23/30, Train Loss: 0.0044, Val Loss: 0.0048
+Final Training Epoch 27/30, Train Loss: 0.0038, Val Loss: 0.0044
+Final Training Epoch 28/30, Train Loss: 0.0040, Val Loss: 0.0044
+Final Training Epoch 29/30, Train Loss: 0.0038, Val Loss: 0.0041
+Final Training Epoch 30/30, Train Loss: 0.0033, Val Loss: 0.0041
+
+--- Final LSTM Model Evaluation Results ---
+    Mean Squared Error (MSE): 0.0041
+    R-squared (R2 Score): 0.9030

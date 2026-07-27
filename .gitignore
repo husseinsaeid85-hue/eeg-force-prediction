@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv/
+.data/
+
+# Editors / tooling
+.idea/
+.ruff_cache/
+__MACOSX/
+
+# Cached intermediates and trained models — large, reproducible from the pipeline
+*.pkl
+*.pth
+
+# Human-subject recordings — not redistributable
+data/*/
+!data/.gitkeep

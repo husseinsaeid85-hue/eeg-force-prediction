@@ -1,0 +1,8 @@
+--- Best XGBoost Model Parameters Found ---
+{'colsample_bytree': 0.9, 'learning_rate': 0.08, 'max_depth': 9, 'n_estimators': 350, 'subsample': 0.9}
+------------------------------------------
+    Predictions made on the test set using the best model.
+
+--- Model Evaluation Results (Best XGBoost) ---
+    Mean Squared Error (MSE): 0.0306
+    R-squared (R2 Score): 0.5814

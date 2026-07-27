@@ -1,0 +1,68 @@
+[project]
+name = "eeg-force-prediction"
+version = "0.1.0"
+description = "Continuous finger force prediction from EEG and EMG using XGBoost and LSTM"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    # --- Core Scientific & ML Libraries ---
+    "numpy",
+    "scipy",
+    "pandas",
+    "scikit-learn",
+    "matplotlib",
+    "xgboost>=2.0.0",
+    "sympy",
+    "mpmath",
+    "plotly",
+    "narwhals",
+
+    # --- Main EEG Library ---
+    "mne",
+
+    # --- Hyperparameter Optimization ---
+    "optuna",
+    "optuna[visualization]",
+    "colorlog",
+    "tqdm",
+    "optuna-integration[xgboost]",
+ # --- Real-Time Streaming ---
+    "pylsl",
+
+    # --- Deep Learning (for your models) ---
+    "torch",
+    "torchvision",
+    "typing-extensions",
+
+    # --- Common "Hidden" Dependencies & Utilities ---
+    "Pillow",
+    "Jinja2",
+    "decorator",
+    "kiwisolver",
+    "packaging",
+    "pyparsing",
+    "python-dateutil",
+    "pytz",
+    "six",
+    "cycler",
+    "fonttools",
+    "lazy_loader",
+    "pooch",
+    "joblib",
+    "threadpoolctl",
+    "contourpy",
+     "PyQt5",# <-- ADD THIS LINE
+]
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+torchvision = [
+  { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

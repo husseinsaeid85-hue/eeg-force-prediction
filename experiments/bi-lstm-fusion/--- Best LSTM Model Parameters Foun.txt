@@ -1,0 +1,9 @@
+--- Best LSTM Model Parameters Found (Optuna) ---
+{'hidden_units': 112, 'num_layers': 2, 'learning_rate': 0.001332411369041349, 'dropout': 0.3667731809046474}
+-------------------------------------------------
+
+--- Final LSTM Model Evaluation Results ---
+    Mean Squared Error (MSE): 0.0038
+    R-squared (R2 Score): 0.9078
+-----------------------------------------
+--- Saving trained model to: trained_lstm_optuna_eeg_emg_model.pth ---

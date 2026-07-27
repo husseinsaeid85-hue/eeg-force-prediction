@@ -1,0 +1,9 @@
+--- Best XGBoost Model Parameters Found (Optuna) ---
+{'lambda': 0.05071247227915229, 'alpha': 0.5145250011584488, 'colsample_bytree': 0.8894613777157864, 'subsample': 0.7872367933635185, 'learning_rate': 0.07906895982829987, 'n_estimators': 999, 'max_depth': 7, 'min_child_weight': 7}
+----------------------------------------------------
+    Training final model on full training data with best params...
+    Final model training complete.
+
+--- Model Evaluation Results (Best from Optuna) ---
+    Mean Squared Error (MSE): 0.0291
+    R-squared (R2 Score): 0.5983

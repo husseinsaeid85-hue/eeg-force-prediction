@@ -1,0 +1,58 @@
+hyperparameters (hidden_units=50, num_layers=3, lr=0.001)
+Lstm sequence_length = 5
+Starting main script...
+--- Loading features and targets from cache: extracted_features_cache.pkl ---
+
+--- RUNNING LSTM EXPERIMENT ---
+--- No sequenced data found in cache. Running data sequencing. ---
+
+--- Creating sequences with a length of 5 time steps... ---
+    Original X shape: (15494, 80)
+    Original y shape: (15494, 10)
+    Resulting X_seq shape: (15485, 10, 80)
+    Resulting y_seq shape: (15485, 10)
+--- Sequence creation complete. ---
+--- Saving sequenced data to cache: sequenced_data_cache.pkl ---
+
+--- STEP 4: MODEL TRAINING AND EVALUATION (LSTM REGRESSION) ---
+    Data split: Train samples=12388, Test samples=3097
+    Using batch size: 64
+    LSTM model initialized with 50 hidden units and 3 layers.
+
+--- Starting training for 25 epochs... ---
+Epoch 1/25, Average Training Loss: 0.0690
+Epoch 2/25, Average Training Loss: 0.0615
+Epoch 3/25, Average Training Loss: 0.0579
+Epoch 4/25, Average Training Loss: 0.0538
+Epoch 5/25, Average Training Loss: 0.0494
+Epoch 6/25, Average Training Loss: 0.0477
+Epoch 7/25, Average Training Loss: 0.0441
+Epoch 8/25, Average Training Loss: 0.0429
+Epoch 9/25, Average Training Loss: 0.0400
+Epoch 10/25, Average Training Loss: 0.0382
+Epoch 11/25, Average Training Loss: 0.0364
+Epoch 12/25, Average Training Loss: 0.0337
+Epoch 13/25, Average Training Loss: 0.0332
+Epoch 14/25, Average Training Loss: 0.0315
+Epoch 15/25, Average Training Loss: 0.0283
+Epoch 16/25, Average Training Loss: 0.0276
+Epoch 17/25, Average Training Loss: 0.0255
+Epoch 18/25, Average Training Loss: 0.0245
+Epoch 19/25, Average Training Loss: 0.0234
+Epoch 20/25, Average Training Loss: 0.0224
+Epoch 21/25, Average Training Loss: 0.0213
+Epoch 22/25, Average Training Loss: 0.0209
+Epoch 23/25, Average Training Loss: 0.0194
+Epoch 24/25, Average Training Loss: 0.0193
+Epoch 25/25, Average Training Loss: 0.0190
+
+--- LSTM Model Evaluation Results ---
+    Mean Squared Error (MSE): 0.0201
+    R-squared (R2 Score): 0.5868
+-----------------------------------
+--- Saving trained model to: trained_lstm_model.pth ---
+--- Trained model saved. ---
+
+--- Running Visualization ---
+
+--- Main script finished. ---
