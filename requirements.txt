@@ -1,0 +1,28 @@
+# Direct dependencies of the pipeline, for pip users. Python 3.13.
+#
+# The canonical environment is pyproject.toml + uv.lock (`uv sync`), which also
+# pins torch to the CUDA 12.8 wheel index. Installing from this file instead
+# gets whatever torch build is default for your platform.
+
+# --- Core scientific stack ---
+numpy
+scipy
+pandas
+scikit-learn
+matplotlib
+PyQt5                        # Qt5Agg backend, forced by the analysis/ scripts
+
+# --- EEG/EMG processing ---
+mne
+
+# --- Models ---
+xgboost>=2.0.0
+torch
+
+# --- Hyperparameter search ---
+optuna
+optuna-integration[xgboost]  # XGBoostPruningCallback, imported by src/model.py
+plotly                       # backend for optuna.visualization, used in src/visualize.py
+
+# --- Real-time streaming ---
+pylsl                        # also needs the native liblsl library on the system

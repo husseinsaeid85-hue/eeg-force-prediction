@@ -1,4 +1,5 @@
 # main.py
+import argparse
 import sys
 import os
 import numpy as np
@@ -17,26 +18,41 @@ from model import train_and_evaluate_xgboost_Optuna
 from data_sequencer import create_sequences
 from train import train_and_evaluate_lstm_Optuna
 
-# --- MASTER EXPERIMENT FLAGS ---
-# Use these flags to control which experiment you run.
 
-# Flag 1: Choose the features to use
-USE_EMG_FEATURES = True  # Set to True to run with EEG+EMG, False for EEG-only
+def parse_args(argv=None):
+    """Selects which of the four experiment configurations to run."""
+    parser = argparse.ArgumentParser(
+        description="Train a finger-force regressor on EEG (optionally fused with EMG) features.",
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+    )
+    parser.add_argument(
+        '--features', choices=['eeg', 'eeg-emg'], default='eeg-emg',
+        help="'eeg' for EEG-only (80 features), 'eeg-emg' for the EEG+EMG fusion set (120 features)."
+    )
+    parser.add_argument(
+        '--model', choices=['lstm', 'xgboost'], default='lstm',
+        help="'lstm' runs the sequence model (Optuna-tuned), 'xgboost' the tabular baseline (Optuna-tuned)."
+    )
+    return parser.parse_args(argv)
 
-# Flag 2: Choose the model to run
-RUN_LSTM_EXPERIMENT = True  # Set to True to run LSTM, False to run XGBoost
 
-# --- Define Cache Filenames based on the experiment ---
-if USE_EMG_FEATURES:
-    PREPROCESSED_DATA_CACHE_PATH = 'preprocessed_epoched_data_with_emg.pkl'
-    FEATURES_CACHE_PATH = 'extracted_features_with_emg_cache.pkl'
-    SEQUENCED_DATA_CACHE_PATH = 'sequenced_data_with_emg_cache.pkl'
-else:
-    PREPROCESSED_DATA_CACHE_PATH = 'preprocessed_epoched_data_cache.pkl'
-    FEATURES_CACHE_PATH = 'extracted_features_cache.pkl'
-    SEQUENCED_DATA_CACHE_PATH = 'sequenced_data_cache.pkl'
+def main():
+    args = parse_args()
 
-if __name__ == "__main__":
+    # --- MASTER EXPERIMENT FLAGS (set from the command line) ---
+    USE_EMG_FEATURES = (args.features == 'eeg-emg')
+    RUN_LSTM_EXPERIMENT = (args.model == 'lstm')
+
+    # --- Define Cache Filenames based on the experiment ---
+    if USE_EMG_FEATURES:
+        PREPROCESSED_DATA_CACHE_PATH = 'preprocessed_epoched_data_with_emg.pkl'
+        FEATURES_CACHE_PATH = 'extracted_features_with_emg_cache.pkl'
+        SEQUENCED_DATA_CACHE_PATH = 'sequenced_data_with_emg_cache.pkl'
+    else:
+        PREPROCESSED_DATA_CACHE_PATH = 'preprocessed_epoched_data_cache.pkl'
+        FEATURES_CACHE_PATH = 'extracted_features_cache.pkl'
+        SEQUENCED_DATA_CACHE_PATH = 'sequenced_data_cache.pkl'
+
     print("Starting main script...")
     print(f"--- Configuration: USE_EMG_FEATURES={USE_EMG_FEATURES}, RUN_LSTM_EXPERIMENT={RUN_LSTM_EXPERIMENT} ---")
 
@@ -122,3 +138,7 @@ if __name__ == "__main__":
     if not RUN_LSTM_EXPERIMENT: visualize.plot_xgboost_feature_importance(trained_model, get_best_channels())
 
     print("\n--- Main script finished. ---")
+
+
+if __name__ == "__main__":
+    main()

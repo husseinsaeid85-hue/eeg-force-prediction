@@ -1,4 +1,20 @@
-# In visualize_features.py
+"""Sanity-check plots for the extracted EEG feature matrix.
+
+Standalone diagnostic script (nothing in the pipeline imports it). It loads the
+EEG-only feature cache written by ``main.py --features eeg``, un-scales it with
+the saved ``StandardScaler``, and plots:
+
+  1. the distribution of each of the five feature types (alpha, beta, gamma, RMS,
+     variance), to confirm scaling behaved sensibly;
+  2. a short time-series of a few C3 features against the D1 flexion force, to
+     eyeball whether the features track the target at all.
+
+Run from the repository root (the cache path below is relative to the cwd)::
+
+    python src/visualize_features.py
+
+This was previously named ``de.py``; the name carried no meaning.
+"""
 
 import pickle
 import numpy as np
@@ -7,8 +23,8 @@ import sys
 import os
 
 # This script needs to import get_best_channels to know the feature names
-# Add the 'src' directory to the Python path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'src'))
+# Add the 'src' directory (this file's own directory) to the Python path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 from features import get_best_channels
 
 

@@ -24,8 +24,22 @@ SEQUENCE_LENGTH = 5
 NUM_EEG_CHANNELS = 31
 NUM_EMG_CHANNELS = 40
 
-# --- 1. Load Preprocessing Tools, Model, and Scaler ---
-# ... (The "Load or Generate" block for preprocessing tools is correct as is)
+# --- 1. Load Preprocessing Tools ---
+# The montage and the ICA solution used below were fitted offline by the same
+# pipeline as src/preprocessing.py and pickled as {'montage': ..., 'ica': ...}.
+# The pickle is a local artifact and is NOT distributed with the repository, and
+# there is currently no code path here that regenerates it (see README, Known issues).
+print("--- Loading preprocessing tools... ---")
+if not os.path.exists(PREPROCESSING_TOOLS_PATH):
+    sys.exit(
+        f"ERROR: preprocessing tools not found at '{PREPROCESSING_TOOLS_PATH}'.\n"
+        "It must contain the montage and the pre-fitted ICA from offline preprocessing."
+    )
+with open(PREPROCESSING_TOOLS_PATH, 'rb') as f:
+    preprocessing_tools = pickle.load(f)
+montage = preprocessing_tools['montage']
+ica = preprocessing_tools['ica']
+print("--- Preprocessing tools loaded. ---")
 
 # --- 2. Load the Trained Model and Scaler ---
 print("\n--- Loading trained model and scaler... ---")
