@@ -11,7 +11,10 @@ from model import LSTMRegressor
 
 # --- 1. Define Model Path and Parameters ---
 # Use the exact parameters and path you provided.
-MODEL_PATH = r'D:\Users\yf26ojud\code\eeg_force_prediction\trained_lstm_optuna_eeg_emg_model.pth'
+MODEL_PATH = os.environ.get(
+    'EEG_MODEL_PATH',
+    os.path.join(os.path.dirname(__file__), 'trained_lstm_optuna_eeg_emg_model.pth'),
+)
 BEST_PARAMS = {
     'input_features': 120,  # 80 EEG + 40 EMG
     'output_features': 10,

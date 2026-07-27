@@ -109,7 +109,9 @@ def main():
         model_type = "lstm_optuna"
     else:
         print("\n--- RUNNING XGBOOST EXPERIMENT ---")
-        trained_model, (y_test, y_pred), study, history = train_and_evaluate_xgboost_Optuna(X_scaled, y)
+        # XGBoost has no per-epoch loss history, so it returns three values, not four.
+        trained_model, (y_test, y_pred), study = train_and_evaluate_xgboost_Optuna(X_scaled, y)
+        history = None
         model_type = "xgboost_optuna"
 
     # --- Save the trained model with a descriptive name ---
